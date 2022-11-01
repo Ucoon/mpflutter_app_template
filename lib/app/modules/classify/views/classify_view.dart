@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../widget/widget.dart';
 import '../index.dart';
 
 class ClassifyPage extends GetView<ClassifyController> {
@@ -7,6 +8,13 @@ class ClassifyPage extends GetView<ClassifyController> {
 
   @override
   Widget build(BuildContext context) {
+    return CommonLayoutPage<ClassifyController>(
+      _buildBodyWidget,
+      canBack: false,
+    );
+  }
+
+  Widget _buildBodyWidget(BuildContext context) {
     return Center(
       child: Text(
         'classify'.tr,

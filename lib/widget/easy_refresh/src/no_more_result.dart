@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 ///无数据提醒小尾巴组件
@@ -19,7 +18,7 @@ class NoMoreResult extends StatelessWidget {
         text ?? 'no_more'.tr,
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: 12.sp,
+          fontSize: 12,
           color: const Color(0xFFCDCDD0),
         ),
       ),

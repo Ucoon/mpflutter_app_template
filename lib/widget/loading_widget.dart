@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'circle_indicator.dart';
 
 void showLoadingDialog({
@@ -28,7 +27,7 @@ class LoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: SizedBox(
-        width: ScreenUtil().screenWidth,
+        width: MediaQuery.of(context).size.width,
         child: CircleIndicator(
           stop: stop,
           radius: 18,

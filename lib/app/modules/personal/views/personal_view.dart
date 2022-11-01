@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../widget/widget.dart';
 import '../index.dart';
 
 class PersonalPage extends GetView<PersonalController> {
@@ -7,6 +8,13 @@ class PersonalPage extends GetView<PersonalController> {
 
   @override
   Widget build(BuildContext context) {
+    return CommonLayoutPage<PersonalController>(
+      _buildBodyWidget,
+      canBack: false,
+    );
+  }
+
+  Widget _buildBodyWidget(BuildContext context) {
     return Center(
       child: Text(
         'personal'.tr,

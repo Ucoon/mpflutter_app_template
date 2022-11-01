@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../widget.dart';
 
@@ -25,34 +24,34 @@ class EmptyResultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: ScreenUtil().screenWidth,
+        width: MediaQuery.of(context).size.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             getIconPngWithSize(
               icon,
-              width: iconWidth?.w,
-              height: iconHeight?.h,
+              width: iconWidth,
+              height: iconHeight,
               fit: BoxFit.contain,
             ),
             SizedBox(
-              height: 30.5.h,
+              height: 30.5,
             ),
             Text(
               showReload ? 'reload_hint'.tr : text,
               style: TextStyle(
                 color: const Color(0xFF999999),
-                fontSize: 16.sp,
+                fontSize: 16,
               ),
             ),
             SizedBox(
-              height: 20.h,
+              height: 20,
             ),
             showReload
                 ? SizedBox(
-                    width: 124.w,
-                    height: 44.h,
+                    width: 124,
+                    height: 44,
                     child: SecondaryButton(
                       'reload'.tr,
                       onReload,

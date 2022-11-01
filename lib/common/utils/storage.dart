@@ -10,7 +10,7 @@ class StorageUtil {
 
   StorageUtil._internal();
 
-  Future init() async {
+  Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
   }
 

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:mpcore/mpkit/mpkit.dart';
-import '../../../../common/utils/utils.dart';
 import '../../classify/index.dart';
 import '../../global/index.dart';
 import '../../home/index.dart';
@@ -26,98 +24,145 @@ class TabHomePageState extends State<TabHomePage> {
     super.dispose();
   }
 
-  TabHomeController get controller => Get.find();
+  TabHomeController get controller => Get.find<TabHomeController>();
 
-  /// 内容页
-  Widget _buildPageView() {
-    return PageView(
-      physics: const NeverScrollableScrollPhysics(),
-      children: const <Widget>[
-        HomePage(),
-        GlobalPurchasingPage(),
-        ClassifyPage(),
-        PersonalPage(),
-      ],
+  @override
+  Widget build(BuildContext context) {
+    return MPMainTabView(
+      tabs: _createMPMainTabItems(),
       controller: controller.pageController,
-      onPageChanged: controller.handlePageChanged,
+      keepAlive: true,
+      tabBarBuilder: (context, index) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: _createTabBarWidget(
+            index,
+            onTap: controller.handleNavBarTap,
+          ),
+        );
+      },
     );
   }
 
-  /// 底部导航
-  Widget _buildBottomNavigationBar() {
-    List<BottomNavigationBarItem> _bottomItems = _createBottomItems();
-    return Obx(
-      () => MPMainTabView(
-        items: _bottomItems,
-        currentIndex: controller.state.page,
-        backgroundColor: const Color(0xFFFFFEFF),
-        unselectedItemColor: const Color(0xFF828489),
-        selectedItemColor: const Color(0xFFDB593A),
-        type: BottomNavigationBarType.fixed,
-        onTap: controller.handleNavBarTap,
-        selectedFontSize: 10.sp,
-        unselectedFontSize: 10.sp,
-        iconSize: 32.w,
+  List<MPMainTabItem> _createMPMainTabItems() {
+    return <MPMainTabItem>[
+      MPMainTabItem(
+        activeTabWidget: _buildTabWidget(
+          icon: MaterialIcons.home,
+          title: 'tab_home'.tr,
+          active: true,
+        ),
+        inactiveTabWidget: _buildTabWidget(
+          icon: MaterialIcons.home,
+          title: 'tab_home'.tr,
+          active: false,
+        ),
+        builder: (context) => HomePage(),
       ),
-    );
-  }
-
-  List<BottomNavigationBarItem> _createBottomItems() {
-    return <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-        icon: const Icon(
-          Icons.home_outlined,
-          color: Colors.grey,
+      MPMainTabItem(
+        activeTabWidget: _buildTabWidget(
+          icon: MaterialIcons.settings_outlined,
+          title: 'tab_global_purchasing'.tr,
+          active: true,
         ),
-        activeIcon: const Icon(
-          Icons.home_outlined,
-          color: Colors.red,
+        inactiveTabWidget: _buildTabWidget(
+          icon: MaterialIcons.settings_outlined,
+          title: 'tab_global_purchasing'.tr,
+          active: false,
         ),
-        label: 'tab_home'.tr,
+        builder: (context) => GlobalPurchasingPage(),
       ),
-      BottomNavigationBarItem(
-        icon: const Icon(
-          Icons.settings_outlined,
-          color: Colors.grey,
+      MPMainTabItem(
+        activeTabWidget: _buildTabWidget(
+          icon: MaterialIcons.add_alarm,
+          title: 'tab_cash'.tr,
+          active: true,
         ),
-        activeIcon: const Icon(
-          Icons.settings_outlined,
-          color: Colors.red,
+        inactiveTabWidget: _buildTabWidget(
+          icon: MaterialIcons.add_alarm,
+          title: 'tab_cash'.tr,
+          active: false,
         ),
-        label: 'tab_global_purchasing'.tr,
+        builder: (context) => ClassifyPage(),
       ),
-      BottomNavigationBarItem(
-        icon: const Icon(
-          Icons.add_alarm,
-          color: Colors.grey,
+      MPMainTabItem(
+        activeTabWidget: _buildTabWidget(
+          icon: MaterialIcons.person_outline,
+          title: 'tab_personal'.tr,
+          active: true,
         ),
-        activeIcon: const Icon(
-          Icons.add_alarm,
-          color: Colors.red,
+        inactiveTabWidget: _buildTabWidget(
+          icon: MaterialIcons.person_outline,
+          title: 'tab_personal'.tr,
+          active: false,
         ),
-        label: 'tab_cash'.tr,
-      ),
-      BottomNavigationBarItem(
-        icon: const Icon(
-          Icons.person_outline,
-          color: Colors.grey,
-        ),
-        activeIcon: const Icon(
-          Icons.person_outline,
-          color: Colors.red,
-        ),
-        label: 'tab_personal'.tr,
+        builder: (context) => PersonalPage(),
       ),
     ];
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: AppKit.exitApplication,
-      child: Scaffold(
-        body: _buildPageView(),
-        bottomNavigationBar: _buildBottomNavigationBar(),
+  List<Widget> _createTabBarWidget(
+    int index, {
+    Function? onTap,
+  }) {
+    return <Widget>[
+      _buildTabWidget(
+        icon: MaterialIcons.home,
+        title: 'tab_home'.tr,
+        active: index == 0,
+        onTap: () {
+          onTap?.call(0);
+        },
+      ),
+      _buildTabWidget(
+        icon: MaterialIcons.settings_outlined,
+        title: 'tab_global_purchasing'.tr,
+        active: index == 1,
+        onTap: () {
+          onTap?.call(1);
+        },
+      ),
+      _buildTabWidget(
+        icon: MaterialIcons.add_alarm,
+        title: 'tab_cash'.tr,
+        active: index == 2,
+        onTap: () {
+          onTap?.call(2);
+        },
+      ),
+      _buildTabWidget(
+        icon: MaterialIcons.person_outline,
+        title: 'tab_personal'.tr,
+        active: index == 3,
+        onTap: () {
+          onTap?.call(3);
+        },
+      ),
+    ];
+  }
+
+  Widget _buildTabWidget({
+    required String icon,
+    required String title,
+    bool active = false,
+    GestureTapCallback? onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: <Widget>[
+          MPIcon(
+            icon,
+            color: active ? Colors.blue : Colors.grey,
+          ),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 12,
+              color: active ? Colors.blue : Colors.grey,
+            ),
+          ),
+        ],
       ),
     );
   }

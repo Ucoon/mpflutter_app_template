@@ -1,27 +1,21 @@
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:mpcore/mpcore.dart';
 
-Future<void> toastInfo({
+void toastInfo({
   required String msg,
-  Duration? duration,
-  EasyLoadingToastPosition? toastPosition,
-  EasyLoadingMaskType? maskType,
-  bool? dismissOnTap,
+  Duration duration = const Duration(milliseconds: 1500),
+  bool dismissOnTap = false,
 }) async {
-  EasyLoading.showToast(
-    msg,
+  MPWebDialogs.showToast(
+    title: msg,
+    mask: dismissOnTap,
     duration: duration,
-    toastPosition: toastPosition,
-    maskType: maskType,
-    dismissOnTap: dismissOnTap,
   );
 }
 
-bool get isShow => EasyLoading.isShow;
-
-void dismiss({animation = true}) {
-  EasyLoading.dismiss(animation: animation);
+void dismiss() {
+  MPWebDialogs.hideToast();
 }
 
-void show({String status = '加载中...'}) {
-  EasyLoading.show(status: status);
+void showLoading({String status = '加载中...'}) {
+  MPWebDialogs.showLoading(title: status);
 }

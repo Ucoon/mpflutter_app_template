@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../app/base/model/base_page_list_resp.dart';
 import '../../widget.dart';
@@ -48,12 +47,12 @@ Header refreshHead = CustomHeader(
       }
     }
     late final Widget _child = Container(
-      margin: EdgeInsets.only(top: 10.5.h),
+      margin: EdgeInsets.only(top: 10.5),
       child: Text(
         _refreshTitle,
         style: TextStyle(
           color: const Color(0xFFB3B3B3),
-          fontSize: 12.sp,
+          fontSize: 12,
         ),
       ),
     );
@@ -65,7 +64,7 @@ Header refreshHead = CustomHeader(
             overflowAlignment: OverflowBarAlignment.center,
             children: <Widget>[
               SizedBox(
-                width: ScreenUtil().screenWidth,
+                width: MediaQuery.of(context).size.width,
                 child: const LoadingWidget(stop: false),
               ),
               _child,
@@ -111,7 +110,7 @@ Footer loadFooter = CustomFooter(
       _loadingTitle,
       style: TextStyle(
         color: const Color(0xFFB3B3B3),
-        fontSize: 12.sp,
+        fontSize: 12,
       ),
     );
     return RepaintBoundary(
@@ -167,7 +166,7 @@ class PagedListView<T extends BasePageRespEntry> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final listPadding = padding ?? EdgeInsets.symmetric(vertical: 11.h);
+    final listPadding = padding ?? EdgeInsets.symmetric(vertical: 11);
     return EasyRefresh.custom(
       shrinkWrap: true,
       header: refreshHead,

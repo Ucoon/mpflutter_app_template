@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../common/values/values.dart';
 
 /// 灰色边框按钮
@@ -31,11 +30,11 @@ class SecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding ?? EdgeInsets.symmetric(vertical: 11.h),
+      padding: padding ?? EdgeInsets.symmetric(vertical: 11),
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: borderRadius ?? borderRadius6,
-        border: Border.all(color: borderColor, width: 1.w),
+        border: Border.all(color: borderColor, width: 1),
       ),
       child: GestureDetector(
         onTap: () {
