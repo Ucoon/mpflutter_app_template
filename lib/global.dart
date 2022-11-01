@@ -35,7 +35,6 @@ class Global {
           const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
       SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
     }
-    print('Global.init saveAppLocale');
     var _locale = LocaleUtil.getAppLocale();
     if (isBlank(_locale)) {
       LocaleUtil.saveAppLocale(const Locale('zh', 'HK'));

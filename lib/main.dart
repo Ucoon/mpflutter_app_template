@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:mpcore/mpcore.dart';
 import 'app/routes/app_pages.dart';
-import 'common/langs/translation_service.dart';
 import 'common/utils/utils.dart';
 import 'global.dart';
 import 'initial_binding.dart';
@@ -29,6 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMPApp(
+      title: '开发模板',
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.cupertino,
       enableLog: true, // 日志
@@ -37,9 +37,6 @@ class MyApp extends StatelessWidget {
       navigatorObservers: [MPCore.getNavigationObserver()],
       initialRoute: AppPages.initial, // 启动页面
       initialBinding: InitialBinding(),
-      // locale: TranslationService.locale, //刚进入App时，默认显示语言
-      // fallbackLocale: TranslationService.fallbackLocale, //语言选择无效时，备用语言
-      // translations: TranslationService(), //配置显示国际化内容
       builder: (context, widget) {
         return MediaQuery(
           ///设置文字大小不随系统设置改变
@@ -47,16 +44,6 @@ class MyApp extends StatelessWidget {
           child: widget ?? SizedBox(),
         );
       },
-      // localizationsDelegates: const [
-      //   GlobalMaterialLocalizations.delegate,
-      //   GlobalWidgetsLocalizations.delegate,
-      //   GlobalCupertinoLocalizations.delegate,
-      //   //一定要配置,否则iphone手机长按编辑框有白屏卡着的bug出现
-      // ],
-      supportedLocales: const [
-        Locale('en', 'US'),
-        Locale('zh', 'CN'),
-      ],
     );
   }
 }

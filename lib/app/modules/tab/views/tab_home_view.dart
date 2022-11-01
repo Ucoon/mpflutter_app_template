@@ -32,15 +32,6 @@ class TabHomePageState extends State<TabHomePage> {
       tabs: _createMPMainTabItems(),
       controller: controller.pageController,
       keepAlive: true,
-      tabBarBuilder: (context, index) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: _createTabBarWidget(
-            index,
-            onTap: controller.handleNavBarTap,
-          ),
-        );
-      },
     );
   }
 
@@ -49,12 +40,12 @@ class TabHomePageState extends State<TabHomePage> {
       MPMainTabItem(
         activeTabWidget: _buildTabWidget(
           icon: MaterialIcons.home,
-          title: 'tab_home'.tr,
+          title: 'HOME',
           active: true,
         ),
         inactiveTabWidget: _buildTabWidget(
           icon: MaterialIcons.home,
-          title: 'tab_home'.tr,
+          title: 'HOME',
           active: false,
         ),
         builder: (context) => HomePage(),
@@ -62,12 +53,12 @@ class TabHomePageState extends State<TabHomePage> {
       MPMainTabItem(
         activeTabWidget: _buildTabWidget(
           icon: MaterialIcons.settings_outlined,
-          title: 'tab_global_purchasing'.tr,
+          title: '全球购',
           active: true,
         ),
         inactiveTabWidget: _buildTabWidget(
           icon: MaterialIcons.settings_outlined,
-          title: 'tab_global_purchasing'.tr,
+          title: '全球购',
           active: false,
         ),
         builder: (context) => GlobalPurchasingPage(),
@@ -75,12 +66,12 @@ class TabHomePageState extends State<TabHomePage> {
       MPMainTabItem(
         activeTabWidget: _buildTabWidget(
           icon: MaterialIcons.add_alarm,
-          title: 'tab_cash'.tr,
+          title: '领现金',
           active: true,
         ),
         inactiveTabWidget: _buildTabWidget(
           icon: MaterialIcons.add_alarm,
-          title: 'tab_cash'.tr,
+          title: '领现金',
           active: false,
         ),
         builder: (context) => ClassifyPage(),
@@ -88,55 +79,15 @@ class TabHomePageState extends State<TabHomePage> {
       MPMainTabItem(
         activeTabWidget: _buildTabWidget(
           icon: MaterialIcons.person_outline,
-          title: 'tab_personal'.tr,
+          title: '我的',
           active: true,
         ),
         inactiveTabWidget: _buildTabWidget(
           icon: MaterialIcons.person_outline,
-          title: 'tab_personal'.tr,
+          title: '我的',
           active: false,
         ),
         builder: (context) => PersonalPage(),
-      ),
-    ];
-  }
-
-  List<Widget> _createTabBarWidget(
-    int index, {
-    Function? onTap,
-  }) {
-    return <Widget>[
-      _buildTabWidget(
-        icon: MaterialIcons.home,
-        title: 'tab_home'.tr,
-        active: index == 0,
-        onTap: () {
-          onTap?.call(0);
-        },
-      ),
-      _buildTabWidget(
-        icon: MaterialIcons.settings_outlined,
-        title: 'tab_global_purchasing'.tr,
-        active: index == 1,
-        onTap: () {
-          onTap?.call(1);
-        },
-      ),
-      _buildTabWidget(
-        icon: MaterialIcons.add_alarm,
-        title: 'tab_cash'.tr,
-        active: index == 2,
-        onTap: () {
-          onTap?.call(2);
-        },
-      ),
-      _buildTabWidget(
-        icon: MaterialIcons.person_outline,
-        title: 'tab_personal'.tr,
-        active: index == 3,
-        onTap: () {
-          onTap?.call(3);
-        },
       ),
     ];
   }
